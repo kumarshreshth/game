@@ -1,0 +1,46 @@
+{
+  "family": "fastapi-task",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "executionRoleArn": "arn:aws:iam::148761679632:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::148761679632:role/ecsTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "fastapi-container",
+      "image": "148761679632.dkr.ecr.us-east-1.amazonaws.com/fastapi-app:latest",
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/fastapi-task",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "curl -f http://localhost:8000/ || exit 1"
+        ],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 60
+      },
+      "environment": [
+        {
+          "name": "ENV",
+          "value": "production"
+        }
+      ]
+    }
+  ]
+}
