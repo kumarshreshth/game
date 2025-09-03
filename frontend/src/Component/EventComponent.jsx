@@ -4,7 +4,7 @@ import useDataVariable from "../utils/state";
 import app from "../instance/axios";
 import { FaTrophy } from "react-icons/fa";
 
-const EventComponent = ({ events }) => {
+const EventComponent = ({ events, limit }) => {
   const [loading, setLoading] = useState(true);
   const [gameDetail, setGameDetail] = useState(null);
   const [matchData, setMatchData] = useState(null);
@@ -87,6 +87,7 @@ const EventComponent = ({ events }) => {
     );
 
     array = events === "currentEvent" ? nextEvents : previousEvents;
+    array = limit === "ten" ? array.slice(0, 10) : array;
   }
   return (
     matchData &&
@@ -97,7 +98,7 @@ const EventComponent = ({ events }) => {
         style={{ scrollbarWidth: "none" }}
       >
         <div className="flex flex-col items-center gap-4">
-          {array.map((element, index) => {
+          {array.slice(0, 10).map((element, index) => {
             const tag =
               events === "currentEvent"
                 ? getEventTag(element.match_date, element.match_time, 90)
@@ -106,16 +107,24 @@ const EventComponent = ({ events }) => {
             return (
               <div
                 key={index}
-                className="w-full md:h-48 lg:h-56 xl:h-64 bg-[#37393F] rounded-lg"
+                className={`w-full md:h-48 lg:h-56 xl:h-64 ${
+                  limit === "ten" ? "bg-[#37393F]" : "bg-gray-100"
+                } rounded-lg`}
               >
                 <div className="space-y-4 p-4">
                   <div className="flex justify-between items-center">
-                    <div className="text-white md:text-base lg:text-xl xl:text-2xl">
+                    <div
+                      className={`${
+                        limit === "ten" ? "text-white" : "text-black"
+                      } md:text-base lg:text-xl xl:text-2xl`}
+                    >
                       {gameData[element.game_id]}
                     </div>
                     <div
-                      className={`p-1 rounded-xl border border-amber-300 text-white md:text-xs lg:text-sm xl:text-base font-semibold ${
-                        tag === "Ongoing" ? "bg-amber-300" : ""
+                      className={`p-1 rounded-xl border ${
+                        limit === "ten" ? "text-white" : "text-black"
+                      } md:text-xs lg:text-sm xl:text-base font-semibold ${
+                        tag === "Ongoing" ? "bg-amber-300 border-amber-300" : ""
                       }`}
                     >
                       {tag}
@@ -137,11 +146,19 @@ const EventComponent = ({ events }) => {
                               </div>
                             )}
                         </div>
-                        <div className="text-white md:text-sm lg:text-base xl:text-2xl">
+                        <div
+                          className={`${
+                            limit === "ten" ? "text-white" : "text-black"
+                          } md:text-sm lg:text-base xl:text-2xl`}
+                        >
                           {info?.[element.home_franchise_id]?.code}
                         </div>
                       </div>
-                      <div className="text-white md:text-sm lg:text-base xl:text-xl">
+                      <div
+                        className={`${
+                          limit === "ten" ? "text-white" : "text-black"
+                        } md:text-sm lg:text-base xl:text-xl`}
+                      >
                         VS
                       </div>
                       <div className="flex flex-col items-center space-y-2 p-2">
@@ -157,7 +174,11 @@ const EventComponent = ({ events }) => {
                               </div>
                             )}
                         </div>
-                        <div className="text-white md:text-sm lg:text-base xl:text-2xl">
+                        <div
+                          className={`${
+                            limit === "ten" ? "text-white" : "text-black"
+                          } md:text-sm lg:text-base xl:text-2xl`}
+                        >
                           {info?.[element.away_franchise_id]?.code}
                         </div>
                       </div>
@@ -165,7 +186,13 @@ const EventComponent = ({ events }) => {
                   )}
 
                   <div
-                    className="flex justify-center items-center w-full p-2 text-white md:text-sm lg:text-base xl:text-lg underline cursor-pointer hover:text-gray-300"
+                    className={`flex justify-center items-center w-full p-2 ${
+                      limit === "ten" ? "text-white" : "text-black"
+                    } md:text-sm lg:text-base xl:text-lg underline cursor-pointer ${
+                      limit === "ten"
+                        ? "hover:text-gray-300"
+                        : "hover:text-black/80"
+                    }`}
                     onClick={() => handleClick()}
                   >
                     View Details

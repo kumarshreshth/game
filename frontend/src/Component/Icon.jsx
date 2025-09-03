@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
-import { FaBars, FaEllipsisVertical, FaFilter } from "react-icons/fa6";
+import { FaBars, FaEllipsisVertical } from "react-icons/fa6";
 
 const Icon = ({ section }) => {
   const [showOption, setShowOption] = useState(false);
   const [filterPopUp, setFilterPopUp] = useState(false);
+  const [formData, setFormData] = useState(null);
+  const [startDate, setstartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [sport, setSport] = useState(null);
+  const [array, setArray] = useState(null);
+
+  const { matchDetails } = useDataVariable();
 
   const handleFilter = () => {
     setShowOption(false);
@@ -15,6 +22,11 @@ const Icon = ({ section }) => {
     setFilterPopUp(false);
   };
 
+  const handleApply = (e) => {
+    e.preventDefault();
+    alert("submitted");
+  };
+
   const handleClick = () => {
     if (!showOption) {
       setShowOption(true);
@@ -22,10 +34,17 @@ const Icon = ({ section }) => {
       setShowOption(false);
     }
   };
+
+  useEffect(() => {
+    if (matchDetails) {
+      setArray(matchDetails);
+    }
+  }, [matchDetails]);
+
   return (
     <div className="relative">
       <div
-        className={`p-2 hover:bg-[##959595] rounded-sm ${
+        className={`p-2 hover:bg-[#959595] rounded-sm ${
           showOption ? "bg-[#2c3037]" : ""
         }`}
       >
@@ -74,7 +93,7 @@ const Icon = ({ section }) => {
             <div className="mt-5 p-4">
               <div className="text-2xl font-bold">{section}</div>
               <div className="mt-5">
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleApply}>
                   <div className="flex flex-col space-y-2">
                     <label
                       htmlFor="fromDate"
@@ -87,6 +106,8 @@ const Icon = ({ section }) => {
                       type="date"
                       className="border border-gray-300 rounded-md p-2 outline-none"
                       placeholder="Select Date"
+                      value={startDate}
+                      onChange={(e) => setstartDate(e.target.value)}
                     />
                   </div>
                   <div className="flex flex-col space-y-2">
@@ -101,6 +122,8 @@ const Icon = ({ section }) => {
                       type="date"
                       className="border border-gray-300 rounded-md p-2 outline-none"
                       placeholder="Select Date"
+                      value={endDate}
+                      onchange={(e) => setEndDate(e.target.value)}
                     />
                   </div>
 
@@ -115,6 +138,8 @@ const Icon = ({ section }) => {
                       id="sport"
                       className="border border-gray-300 rounded-md p-2 outline-none overflow-auto"
                       defaultValue="1"
+                      value={sport}
+                      onChange={(e) => setSport(e.target.value)}
                     >
                       <option value="1" disabled>
                         Select sport
@@ -132,15 +157,14 @@ const Icon = ({ section }) => {
 
                   <div className="mt-5 space-y-4">
                     <button
+                      type="submit"
                       className="w-full text-center p-2 bg-yellow-300 font-bold rounded-xl border border-amber-600 cursor-pointer hover:bg-gray-500"
-                      onClick={() => handleApply()}
                     >
                       Apply
                     </button>
                     <button
                       type="reset"
                       className="w-full text-center p-2 bg-yellow-300 font-bold rounded-xl border border-amber-600 cursor-pointer hover:bg-gray-500"
-                      onClick={() => handleReset()}
                     >
                       Reset
                     </button>

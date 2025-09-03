@@ -116,49 +116,51 @@ const GalleryComponent = () => {
                 className="w-full h-full object-cover rounded-xl"
               />
               <div className="absolute bottom-0 left-0 w-full h-1/2 bg-[#9797DE] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-xl">
-                <div className="flex flex-row justify-between item-start m-3 xl:m-5">
-                  <div className="space-y-2 lg:space-y-4">
-                    <div className="flex flex-row gap-2 items-center">
-                      <div className="flex flex-col items-center space-y-1 p-1">
-                        <div className="w-6 h-6 xl:w-10 xl:h-10">
-                          <img
-                            src={element.iconPath1}
-                            className="w-full h-full object-cover rounded-full"
-                          />
+                <div className="mt-3 ml-3 mr-3 lg:mt-5 lg:ml-8 lg:mr-8">
+                  <div className="flex flex-row justify-between item-start m-2">
+                    <div className="space-y-2 lg:space-y-4">
+                      <div className="flex flex-row gap-2 items-center">
+                        <div className="flex flex-col items-center space-y-1 p-1">
+                          <div className="w-6 h-6 xl:w-10 xl:h-10">
+                            <img
+                              src={element.iconPath1}
+                              className="w-full h-full object-cover rounded-full"
+                            />
+                          </div>
+                          <div className="md:text-xs xl:text-base">
+                            {element.team1}
+                          </div>
                         </div>
-                        <div className="md:text-xs xl:text-base">
-                          {element.team1}
+                        <div className="md:text-xs xl:text-base">VS</div>
+                        <div className="flex flex-col items-center space-y-1 p-1">
+                          <div className="w-6 h-6 xl:w-10 xl:h-10">
+                            <img
+                              src={element.iconPath2}
+                              className="w-full h-full object-cover rounded-full"
+                            />
+                          </div>
+                          <div className="md:text-xs xl:text-base">
+                            {element.team2}
+                          </div>
                         </div>
                       </div>
-                      <div className="md:text-xs xl:text-base">VS</div>
-                      <div className="flex flex-col items-center space-y-1 p-1">
-                        <div className="w-6 h-6 xl:w-10 xl:h-10">
-                          <img
-                            src={element.iconPath2}
-                            className="w-full h-full object-cover rounded-full"
-                          />
-                        </div>
+                      <div className="flex gap-2 xl:gap-4 items-center">
                         <div className="md:text-xs xl:text-base">
-                          {element.team2}
+                          {element.game.split("M")[0].trim()}
+                        </div>
+                        <div className="w-0.5 md:h-4 xl:h-6 bg-black"></div>
+                        <div className="md:text-xs xl:text-base">
+                          {formatDate(element.date)}
                         </div>
                       </div>
                     </div>
-                    <div className="flex gap-2 xl:gap-4 items-center">
-                      <div className="md:text-xs xl:text-base">
-                        {element.game.split("M")[0].trim()}
-                      </div>
-                      <div className="w-0.5 md:h-4 xl:h-6 bg-black"></div>
-                      <div className="md:text-xs xl:text-base">
-                        {formatDate(element.date)}
-                      </div>
-                    </div>
-                  </div>
 
-                  <div
-                    className="p-2"
-                    onClick={() => openImage(element.imagePath)}
-                  >
-                    <BiExpand className="md:text-xs lg:text-sm xl:text-lg text-black cursor-pointer hover:text-white" />
+                    <div
+                      className="p-2"
+                      onClick={() => openImage(element.imagePath)}
+                    >
+                      <BiExpand className="md:text-xs lg:text-sm xl:text-lg text-black cursor-pointer hover:text-white" />
+                    </div>
                   </div>
                 </div>
               </div>
