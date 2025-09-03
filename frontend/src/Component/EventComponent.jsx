@@ -92,8 +92,11 @@ const EventComponent = ({ events }) => {
     matchData &&
     gameData &&
     info && (
-      <div className="w-100 max-h-[600px] overflow-y-scroll">
-        <div className="flex flex-col gap-8 items-center">
+      <div
+        className="w-full max-h-[600px] overflow-y-scroll"
+        style={{ scrollbarWidth: "none" }}
+      >
+        <div className="flex flex-col items-center gap-4">
           {array.map((element, index) => {
             const tag =
               events === "currentEvent"
@@ -101,14 +104,17 @@ const EventComponent = ({ events }) => {
                 : element.round;
 
             return (
-              <div key={index} className="w-full h-60 bg-[#37393F] rounded-lg">
+              <div
+                key={index}
+                className="w-full md:h-48 lg:h-56 xl:h-64 bg-[#37393F] rounded-lg"
+              >
                 <div className="space-y-4 p-4">
                   <div className="flex justify-between items-center">
-                    <div className="text-white text-xl">
+                    <div className="text-white md:text-base lg:text-xl xl:text-2xl">
                       {gameData[element.game_id]}
                     </div>
                     <div
-                      className={`p-2 rounded-xl border border-amber-300 text-white font-semibold ${
+                      className={`p-1 rounded-xl border border-amber-300 text-white md:text-xs lg:text-sm xl:text-base font-semibold ${
                         tag === "Ongoing" ? "bg-amber-300" : ""
                       }`}
                     >
@@ -119,37 +125,39 @@ const EventComponent = ({ events }) => {
                   {info && (
                     <div className="flex justify-evenly items-center">
                       <div className="flex flex-col items-center space-y-2 p-2">
-                        <div className="w-10 h-10 relative">
+                        <div className="md:w-6 md:h-6 lg:w-10 lg:h-10 xl:w-14 xl:h-14 relative">
                           <img
                             src={info?.[element.home_franchise_id]?.imagePath}
                             className="w-full h-full object-cover rounded-full"
                           />
                           {events === "previousEvent" &&
                             element.winner_id === element.home_franchise_id && (
-                              <div className="absolute -top-1 left-8 w-6 h-6 bg-amber-300 rounded-full">
+                              <div className="absolute -top-1 left-4 lg:left-6 xl:left-10 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-8 xl:h-8 bg-amber-300 rounded-full">
                                 <FaTrophy className="w-full h-full text-black p-1" />
                               </div>
                             )}
                         </div>
-                        <div className="text-white text-lg">
+                        <div className="text-white md:text-sm lg:text-base xl:text-2xl">
                           {info?.[element.home_franchise_id]?.code}
                         </div>
                       </div>
-                      <div className="text-white text-lg">VS</div>
+                      <div className="text-white md:text-sm lg:text-base xl:text-xl">
+                        VS
+                      </div>
                       <div className="flex flex-col items-center space-y-2 p-2">
-                        <div className="w-10 h-10 relative">
+                        <div className="md:w-6 md:h-6 lg:w-10 lg:h-10 xl:w-14 xl:h-14 relative">
                           <img
                             src={info?.[element.away_franchise_id]?.imagePath}
                             className="w-full h-full object-cover rounded-full"
                           />
                           {events === "previousEvent" &&
                             element.winner_id === element.away_franchise_id && (
-                              <div className="absolute -top-1 left-8 w-6 h-6 bg-amber-300 rounded-full">
+                              <div className="absolute -top-1 left-4 lg:left-6 xl:left-10 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-8 xl:h-8 bg-amber-300 rounded-full">
                                 <FaTrophy className="w-full h-full text-black p-1" />
                               </div>
                             )}
                         </div>
-                        <div className="text-white text-lg">
+                        <div className="text-white md:text-sm lg:text-base xl:text-2xl">
                           {info?.[element.away_franchise_id]?.code}
                         </div>
                       </div>
@@ -157,8 +165,8 @@ const EventComponent = ({ events }) => {
                   )}
 
                   <div
-                    className="flex justify-center items-center w-full p-4 text-white underline cursor-pointer hover:text-gray-300"
-                    onClick={() => {}}
+                    className="flex justify-center items-center w-full p-2 text-white md:text-sm lg:text-base xl:text-lg underline cursor-pointer hover:text-gray-300"
+                    onClick={() => handleClick()}
                   >
                     View Details
                   </div>

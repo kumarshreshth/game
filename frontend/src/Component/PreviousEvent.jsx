@@ -6,15 +6,19 @@ import EventComponent from "./EventComponent";
 const PreviousEvent = () => {
   return (
     <div>
-      <div className="flex gap-24 items-center">
-        <div className="flex gap-6 items-center">
-          <FaCalendar className="text-[#9797DE] text-3xl" />
-          <div className="space-y-2 text-white">
-            <div className="text-2xl">Previous Events</div>
-            <div className="text-lg">Previous tournament results</div>
+      <div className="flex justify-between items-center p-2">
+        <div className="flex gap-2 items-center">
+          <FaCalendar className="text-[#9797DE] md:text-base lg:text-xl xl:text-3xl" />
+          <div className="lg:space-y-1 text-white">
+            <div className="md:text-base lg:text-xl xl:text-3xl">
+              Previous Events
+            </div>
+            <div className="md:text-xs lg:text-lg xl:text-2xl">
+              Previous tournament results
+            </div>
           </div>
         </div>
-        <Icon />
+        <Icon section={"Previous Events"} />
       </div>
 
       <div className="mt-10">

@@ -51,54 +51,65 @@ const LeaderBoard = () => {
   return (
     <div>
       <div className="flex flex-row gap-4 items-center">
-        <FaTrophy className="text-5xl text-[#9797DE]" />
+        <FaTrophy className="md:text-2xl lg:text-xl xl:text-6xl text-[#9797DE]" />
         <div className="space-y-2 text-white">
-          <div className="text-4xl">Top Team</div>
-          <div className="text-xl">Current season leaderboard</div>
+          <div className="md:text-xl lg:text-3xl xl:text-5xl">Top Team</div>
+          <div className="md:text-base lg:text-xl xl:text-3xl">
+            Current season leaderboard
+          </div>
         </div>
       </div>
 
       <div className="mt-10">
         {data && (
-          <div className="grid grid-cols-4 gap-6">
+          <div className="grid grid-cols-4 gap-2">
             {Object.values(data).map((element, index) => (
-              <div key={index} className="w-full h-70 bg-[#2F3136] rounded-xl">
-                <div className="flex flex-row gap-6 items-center m-4">
-                  <div className="w-12 h-12">
+              <div
+                key={index}
+                className="w-full md:h-50 lg:h-60 xl:h-70 bg-[#2F3136] rounded-xl"
+              >
+                <div className="flex flex-row gap-2 items-center md:m-2 lg:m-4 xl:m-6">
+                  <div className="md:w-8 md:h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12">
                     <img
                       src={element.imagePath}
                       className=" w-full h-full object-cover rounded-full object-center"
                     />
                   </div>
-                  <div className="flex flex-col gap-4 text-white">
-                    <div className="text-base font-bold">{element.name}</div>
-                    <div className="space-x-2">
-                      <span className="bg-yellow-400 pl-3 pr-3 pt-2 pb-2 rounded-2xl text-sm text-black font-bold">
+                  <div className="flex flex-col gap-2 text-white">
+                    <div className="md:text-xs lg:text-base lg:font-bold xl:text-xl">
+                      {element.name}
+                    </div>
+                    <div className="space-x-2 xl:space-x-4">
+                      <span className="bg-yellow-400 p-1 rounded-lg md:text-xs lg:text-sm xl:text-lg text-black font-bold">
                         #{index + 1}
                       </span>
-                      <span className="text-sm">
+                      <span className="md:text-xs lg:text-lg lg:font-bold xl:text-xl">
                         {element.totalScore} Points
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-8 ml-4 mr-4">
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className=" w-full h-full bg-[#37393F] text-center space-y-8 rounded-lg p-2">
-                      <div className="text-green-500 text-2xl font-bold">
+                <div className="mt-8 m-1">
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className=" w-full h-full bg-[#37393F] text-center space-y-2 xl:space-y-4 rounded-lg p-1">
+                      <div className="text-green-500 md:text-base lg:text-xl lg:font-bold xl:text-2xl">
                         {element.wonScore}
                       </div>
-                      <div className="text-2xl text-white font-bold">WINS</div>
+                      <div className="md:text-base lg:text-xl lg:font-bold xl:text-2xl text-white">
+                        WINS
+                      </div>
                     </div>
-                    <div className=" w-full h-full bg-[#37393F] text-center space-y-8 rounded-lg p-2">
-                      <div className="text-red-500 text-2xl font-bold">
+                    <div className=" w-full h-full bg-[#37393F] text-center space-y-2 xl:space-y-4 rounded-lg p-1">
+                      <div className="text-red-500 md:text-base lg:text-xl lg:font-bold xl:text-2xl">
                         {element.lostScore}
                       </div>
-                      <div className="text-2xl text-white font-bold">LOSES</div>
+                      <div className="md:text-base lg:text-xl lg:font-bold xl:text-2xl text-white">
+                        LOSES
+                      </div>
                     </div>
-                    <div className="w-full h-full bg-[#37393F] text-center space-y-8 rounded-lg p-2">
-                      <div className="text-[#9797DE] text-2xl font-bold">
+                    <div className="w-full h-full bg-[#37393F] text-center space-y-2 xl:space-y-4 rounded-lg p-1">
+                      <div className="text-[#9797DE] md:text-base lg:text-xl lg:font-bold xl:text-2xl">
                         {element.wonScore + element.lostScore === 0
                           ? "0%"
                           : `${(
@@ -106,7 +117,7 @@ const LeaderBoard = () => {
                               100
                             ).toFixed(0)}%`}
                       </div>
-                      <div className="text-2xl text-white font-bold">
+                      <div className="md:text-base lg:text-xl lg:font-bold xl:text-2xl text-white">
                         WIN RATE
                       </div>
                     </div>

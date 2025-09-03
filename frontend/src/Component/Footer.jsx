@@ -11,8 +11,12 @@ const Footer = () => {
           />
         </div>
         <div className="flex flex-row items-center gap-4 underline text-base text-white">
-          <div>Sport Guidelines</div>
-          <div>Contact Us</div>
+          <div className="md:text-sm lg:text-base xl:text-lg cursor-pointer hover:text-gray-400">
+            Sport Guidelines
+          </div>
+          <div className="md:text-sm lg:text-base xl:text-lg cursor-pointer hover:text-gray-400">
+            Contact Us
+          </div>
         </div>
       </div>
     </div>
